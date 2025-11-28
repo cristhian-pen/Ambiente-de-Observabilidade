@@ -1,0 +1,30 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+
+exporters:
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
+    labels:
+      service_name: ${OTEL_SERVICE_NAME}
+
+otlp:
+  endpoint: "tempo:3200"
+  tls:
+    insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [loki]

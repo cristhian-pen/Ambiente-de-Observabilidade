@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página de Teste — Home</title>
+
+  <!-- Importar CSS externo -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+
+<div id="modalNome" class="modal">
+  <div class="modal-content">
+    <h2>Bem-vindo!</h2>
+    <p>Digite seu nome para personalizar a experiência:</p>
+
+    <input type="text" id="inputNome" placeholder="Seu nome..." required>
+
+    <div class="modal-buttons">
+      <button class="btn" onclick="salvarNome()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+
+
+<body>
+  <div class="container">
+
+    <header>
+      <div class="brand">
+        <div class="logo">T</div>
+        <div>
+          <h1 tituloNomeUsuario>Bem Vindo</h1>
+          <p class="lead">Home da pagina de cadastro de novas skins do Cs2</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+
+        <!-- CARD CRIAR -->
+        <div class="card card-animate">
+          <h2>Cadastrar Skins</h2>
+          <p class="muted">Adicionar novos registros à aplicação de testes.</p>
+          <form action="http://127.0.0.1:5000/cadastraSkin" method="POST">
+
+            <label for="nome">Nome da Skin:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="modelo">Modelo da arma:</label>
+            <input type="text" id="modelo" name="modelo" required>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="stattrak" name="stattrak" value="true">
+              <label for="stattrak">StatTrak</label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="souvenir" name="souvenir" value="true">
+              <label for="souvenir">Souvenir</label>
+            </div>
+
+            <button type="submit" class="btn">Cadastrar</button>
+          </form>
+        </div>
+
+        <!-- CARD LISTAR -->
+        <div class="card card-animate">
+          <h2>Listar Skins Cadastradas</h2>
+          <p class="muted">Visualizar todos os registros cadastrados.</p>
+          <button type="button" onclick="listar()" class="btn">Listar</button>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Importar JS externo -->
+  <script src="{{ url_for('static', filename='scripts.js') }}">
+  </script>
+</body>
+
+</html>
