@@ -21,7 +21,7 @@ services:
       image: otel/opentelemetry-collector-contrib:latest
       container_name: otel-collector
       volumes:
-        - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+        - ./otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml
       ports:
         - "4317:4317"   # OTLP gRPC receiver
         - "4318:4318" 
@@ -31,11 +31,11 @@ services:
   loki:
     image: grafana/loki:latest
     container_name: loki
-    command: -config.file=/etc/loki/local-config.yaml
+    #command: -config.file=/etc/loki/loki-config.yaml
     ports:
       - "3100:3100"
     volumes:
-      - ./loki-config.yaml:/etc/loki/local-config.yaml
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml
       - loki-data:/loki
     networks:
       - observability-network
@@ -43,12 +43,12 @@ services:
   tempo:
     image: grafana/tempo:latest
     container_name: tempo
-    command: -config.file=/etc/tempo/local-config.yaml
+    command: -config.file=/etc/tempo/tempo-config.yaml
     ports:
       - "3200:3200"
     volumes:
+      - ./tempo/tempo-config.yaml:/etc/tempo/tempo-config.yaml
       - tempo-data:/var/tempo
-      - tempo-data:/tempo
     networks:
       - observability-network
   
@@ -58,7 +58,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
     depends_on:
       - loki
       - tempo
