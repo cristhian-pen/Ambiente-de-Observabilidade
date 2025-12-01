@@ -39,11 +39,11 @@ def Instrumentation(app):
     
 def InstrumentationLogs():
     
-    logProvider = LoggerProvider(
-        resouces = Resource.create({
+    resouce = Resource.create({
             "service_name": "skins-cs2-api API"
         })
-    )
+    
+    logProvider = LoggerProvider(resource=resouce)
     
     
     #Alterar o endpoint do Loki
