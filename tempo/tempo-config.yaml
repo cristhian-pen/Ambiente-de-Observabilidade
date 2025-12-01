@@ -12,4 +12,4 @@ storage:
   trace:
     backend: local
     local: 
-      path: /tempo
+      path: /var/lib/tempo

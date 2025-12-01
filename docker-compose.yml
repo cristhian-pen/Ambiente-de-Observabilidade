@@ -48,7 +48,7 @@ services:
       - "3200:3200"
     volumes:
       - ./tempo/tempo-config.yaml:/etc/tempo/tempo-config.yaml
-      - tempo-data:/var/tempo
+      - tempo-data:/var/lib/tempo
     networks:
       - observability-network
   
