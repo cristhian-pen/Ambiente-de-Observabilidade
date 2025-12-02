@@ -4,11 +4,11 @@ version: "3.0"
 services:
   app: 
     build: .
-    container_name: lista_skins_cs2-flask
+    container_name: skins-cs2-api-API
     ports: 
       - "5000:5000"
     environment:
-      - OTEL_SERVICE_NAME=lista_skins_cs2-flask
+      - OTEL_SERVICE_NAME=skins-cs2-api-API
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
       - OTEL_TRACES_EXPORTER=otlp

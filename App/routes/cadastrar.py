@@ -10,7 +10,7 @@ def cadastra_skin():
         nomeSkin = request.form["nome"]
         modeloSkin = request.form["modelo"]
         statrackSkin = request.form.get("stattrak","false")
-        souvenirSkin = request.form.get("souvenir", "false")
+        souvenirSkin = request.form.get("souvenir","false")
         
         CadastrarNovaSkin(nomeSkin,modeloSkin, statrackSkin, souvenirSkin)
         
