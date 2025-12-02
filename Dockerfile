@@ -2,7 +2,7 @@
 FROM docker.io/python:3.11-slim
 
 # Definir diretório de trabalho
-WORKDIR /app/App
+WORKDIR /app
 
 # Instalar dependências do sistema (caso necessárias)
 RUN apt-get upgrade && apt-get update && apt-get install -y --no-install-recommends \
@@ -20,6 +20,8 @@ COPY . .
 
 # Expor porta padrão do Flask
 EXPOSE 5000
+
+WORKDIR /app/App 
 
 # Comando padrão – ajustável caso use outro arquivo
 CMD ["python", "app.py"]
