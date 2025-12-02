@@ -15,8 +15,8 @@ def Instrumentation(app):
     
     resource = Resource({
         "service.name": "skins-cs2-api-API",
-        "service_version": "1.0.0",
-        "deployment_enviroment": "development"
+        "service.version": "1.0.0",
+        "deployment.enviroment": "development"
     })
     
     
