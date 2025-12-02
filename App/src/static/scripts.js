@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function listar() {
-    window.location.href = "http://127.0.0.1:5000/listaSkins";
+    window.location.href = "/listaSkins";
 }
 
 

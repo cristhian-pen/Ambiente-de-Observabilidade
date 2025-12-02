@@ -5,7 +5,7 @@ receivers:
       http:
 
 processors:
-  batch:
+  batch: {}
 
 exporters:
   loki:
@@ -13,10 +13,10 @@ exporters:
     labels:
       service_name: ${OTEL_SERVICE_NAME}
 
-otlp:
-  endpoint: "tempo:3200"
-  tls:
-    insecure: true
+  otlp:
+    endpoint: "tempo:3200"
+    tls:
+      insecure: true
 
 service:
   pipelines:

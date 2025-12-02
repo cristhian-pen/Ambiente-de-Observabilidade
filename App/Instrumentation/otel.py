@@ -4,6 +4,7 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 from opentelemetry import trace
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
 from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
@@ -25,7 +26,7 @@ def Instrumentation(app):
     #Alterar o endpoint do Tempo
     exporter = OTLPSpanExporter(
         
-        endpoint="http://otel-collector:3200/v1/traces"
+        endpoint="http://otel-collector:4317"
     )
     
     span_processor = BatchSpanProcessor(exporter)
@@ -39,16 +40,16 @@ def Instrumentation(app):
     
 def InstrumentationLogs():
     
-    resouce = Resource.create({
+    resource = Resource.create({
             "service_name": "skins-cs2-api API"
         })
     
-    logProvider = LoggerProvider(resource=resouce)
+    logProvider = LoggerProvider(resource=resource)
     
     
     #Alterar o endpoint do Loki
-    exporter = OTLPSpanExporter(
-        endpoint="http://loki:3100/v1/logs"
+    exporter = OTLPLogExporter(
+        endpoint="http://otel-collector:4317"
     )
     
     logProvider.add_log_record_processor(
