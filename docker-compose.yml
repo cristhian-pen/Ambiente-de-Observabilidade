@@ -54,6 +54,16 @@ services:
     networks:
       - observability-network
   
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - observability-network
+  
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -64,8 +74,11 @@ services:
     depends_on:
       - loki
       - tempo
+      - prometheus
     networks:
       - observability-network
+
+  
 
 networks:
   observability-network:
