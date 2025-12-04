@@ -9,7 +9,7 @@ echo "Construindo a aplicação Flask..."
 docker-compose build app
 
 echo "Subindo todos os serviços em background..."
-docker-compose up -d
+docker-compose up 
 
 echo "Aguardando alguns segundos para os containers iniciarem..."
 sleep 5
