@@ -3,8 +3,8 @@ from routes.cadastrar import route
 from routes.listar import listRoute
 from Logs.logger import logger
 from Instrumentation.otel import Instrumentation, InstrumentationLogs
+from Instrumentation.prometheus import InitMetrics, request_total
 import logging
-from prometheus_flask_exporter import PrometheusMetrics
 
 
 app = Flask(
@@ -14,9 +14,9 @@ app = Flask(
 )
 
 log = logging.getLogger(__name__)
-metrics = PrometheusMetrics(app)
 Instrumentation(app)
 InstrumentationLogs()
+InitMetrics(app)
 
 #Configurações dos containers
 grafana = 3000
@@ -27,6 +27,8 @@ prometheus = 5000
 
 @app.route("/")
 def Home():
+    #Metrica para contar a quantidade de usuarios ativos na aplicação
+    request_total.inc()
     logger("A pagina home foi acessada", "INFO")  
     return render_template("index.html")
 
